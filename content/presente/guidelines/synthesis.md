@@ -55,11 +55,11 @@
 
 ---
 
-## 4. [CLAUDE.md](http://claude.md/)
+## 4. `CLAUDE.md`
 
 | Section | Content |
 | --- | --- |
-| **Guideline** | [CLAUDE.md](http://claude.md/) should function as the project constitution, bringing together mission, architecture, rules, restrictions, technical standards, commands, and stopping criteria. |
+| **Guideline** | `CLAUDE.md` should function as the project constitution, bringing together mission, architecture, rules, restrictions, technical standards, commands, and stopping criteria. |
 | **Best Practices** | Include project goals; folder structure; commands; coding standards; testing rules; security restrictions; review criteria; clear instructions for the agent. |
 | **Common Mistakes** | Using a generic file; writing vague rules; forgetting to update it; adding contradictory instructions; omitting forbidden commands or sensitive files. |
 | **Practical Application** | Every Claude Code project should include a guidance file to avoid improvisation, inconsistency, unsafe changes, and decisions misaligned with project goals. |

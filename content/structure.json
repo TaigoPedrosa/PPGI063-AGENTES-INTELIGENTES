@@ -8,7 +8,7 @@
     {
       "name": "Passado",
       "slug": "passado",
-      "description": "As raízes dos agentes inteligentes — dos sistemas simbólicos e arquiteturas BDI aos primeiros sistemas multiagente que pavimentaram o caminho até hoje.",
+      "description": "As raízes dos agentes inteligentes, dos sistemas simbólicos e arquiteturas BDI aos primeiros sistemas multiagente que pavimentaram o caminho até hoje.",
       "markdown": "passado/index.md"
     },
     {
@@ -19,7 +19,7 @@
         {
           "name": "Guidelines",
           "slug": "guidelines",
-          "description": "Diretrizes para entender, projetar e operar agentes inteligentes com responsabilidade — da arquitetura à janela de contexto.",
+          "description": "Diretrizes para entender, projetar e operar agentes inteligentes com responsabilidade, da arquitetura à janela de contexto.",
           "children": [
             {
               "name": "Síntese",
@@ -30,7 +30,7 @@
             {
               "name": "Multiplataforma",
               "slug": "multiplataforma",
-              "description": "Como skills, regras, prompts e agentes se mapeiam entre Claude, Copilot, Gemini e Cursor — com diagrama de decisão.",
+              "description": "Como skills, regras, prompts e agentes se mapeiam entre Claude, Copilot, Gemini e Cursor, com diagrama de decisão.",
               "markdown": "presente/guidelines/multi-platform.md"
             }
           ]
@@ -49,7 +49,7 @@
             {
               "name": "Subagents",
               "slug": "subagents",
-              "description": "Quando e como delegar a subagentes — isolamento de contexto, paralelismo e verificação adversarial.",
+              "description": "Quando e como delegar a subagentes: isolamento de contexto, paralelismo e verificação adversarial.",
               "markdown": "presente/best-practices/subagents.md"
             },
             {
@@ -102,13 +102,13 @@
         {
           "name": "Articles · Skills",
           "slug": "articles-skills",
-          "description": "Coletânea de artigos sobre skills — o que são, como funcionam e por que importam.",
+          "description": "Coletânea de artigos sobre skills: o que são, como funcionam e por que importam.",
           "markdown": "presente/articles-skills.md"
         },
         {
           "name": "Claude Code & Tools",
           "slug": "claude-code",
-          "description": "Comandos do Claude Code, Claude Cowork e Claude Design — o ferramental no dia a dia.",
+          "description": "Comandos do Claude Code, Claude Cowork e Claude Design, o ferramental no dia a dia.",
           "markdown": "presente/claude-code.md"
         },
         {
@@ -122,8 +122,39 @@
     {
       "name": "Futuro",
       "slug": "futuro",
-      "description": "Para onde caminham os agentes: autonomia de longo horizonte, sociedades de agentes, confiança e segurança, e a economia de tokens que molda a engenharia.",
-      "markdown": "futuro/index.md"
+      "description": "Para onde caminham os agentes: de assistentes de software baseados em linguagem a sistemas multimodais que percebem, modelam e planejam no mundo físico. World models na linhagem JEPA (V-JEPA 2 → LeWorldModel → HWM), planejamento em espaço latente e a transição da IA Generativa para a IA Física.",
+      "children": [
+        {
+          "name": "Fundamentos",
+          "slug": "fundamentos",
+          "description": "A ponte conceitual do presente ao futuro: de agentes de software baseados em linguagem a agentes multimodais que percebem, modelam, predizem e planejam no mundo.",
+          "markdown": "futuro/foundations.md"
+        },
+        {
+          "name": "Articles · World Models",
+          "slug": "articles",
+          "description": "Um resumo por artigo da linhagem LeCun/JEPA, do paper-manifesto de 2022 aos world models de 2026 e à IA agêntica distribuída no edge.",
+          "markdown": "futuro/articles.md"
+        },
+        {
+          "name": "Best Practices",
+          "slug": "best-practices",
+          "description": "O panorama das duas apresentações: as três eras da IA, níveis de autonomia, arquitetura de world models, planejamento hierárquico, riscos e governança.",
+          "markdown": "futuro/best-practices.md"
+        },
+        {
+          "name": "Experiments",
+          "slug": "experiments",
+          "description": "Digest dos benchmarks reportados nos papers (HWM, Temporal Straightening, LeWorldModel, V-JEPA 2.1) com tabelas de métricas e a análise transversal.",
+          "markdown": "futuro/experiments.md"
+        },
+        {
+          "name": "Costs",
+          "slug": "costs",
+          "description": "Custo como computação e energia: planejamento latente 48× mais rápido, tamanho dos modelos, custo de treino/dados e a fronteira de energia no edge.",
+          "markdown": "futuro/costs.md"
+        }
+      ]
     }
   ]
 }

@@ -26,7 +26,7 @@ Lists skills and sorts by token count; `Space` hides a skill from the menu and `
 
 ### [`/workflows`](https://code.claude.com/docs/en/workflows)
 
-Opens the progress view for *dynamic workflows* — runs that fan work out across many subagents in the background.
+Opens the progress view for *dynamic workflows*, runs that fan work out across many subagents in the background.
 
 ```
 > /workflows
@@ -46,7 +46,7 @@ Reviews at high effort and applies the fixes to your working tree; use `ultra` f
 
 ### [`/simplify`](https://code.claude.com/docs/en/code-review)
 
-A cleanup-only review: four agents run in parallel covering reuse of existing helpers, simplification, efficiency, and the right level of abstraction — and apply the fixes. From v2.1.154 it does not look for correctness bugs (use `/code-review` for that).
+A cleanup-only review: four agents run in parallel covering reuse of existing helpers, simplification, efficiency, and the right level of abstraction, and apply the fixes. From v2.1.154 it does not look for correctness bugs (use `/code-review` for that).
 
 ```
 > /simplify src/auth/
@@ -156,7 +156,7 @@ Opens the extra-credits configuration.
 
 ### [`/btw`](https://code.claude.com/docs/en/interactive-mode#side-questions-with-%2Fbtw)
 
-Asks a quick side question without adding anything to the main conversation's context — great for a quick question without bloating the history.
+Asks a quick side question without adding anything to the main conversation's context, great for a quick question without bloating the history.
 
 ```
 > /btw what's the difference between git rebase and merge?
@@ -166,7 +166,7 @@ Answers on the side, without polluting the task in progress.
 
 ### [`/schedule`](https://code.claude.com/docs/en/routines)
 
-Creates, updates, lists, or runs *routines* — tasks that execute on Anthropic-managed cloud infrastructure. Claude walks you through the setup conversationally. *(Alias: `/routines`.)*
+Creates, updates, lists, or runs *routines*, tasks that execute on Anthropic-managed cloud infrastructure. Claude walks you through the setup conversationally. *(Alias: `/routines`.)*
 
 ```
 > /schedule run the tests and open a PR every Monday at 9am
@@ -186,7 +186,7 @@ The session keeps running in the background; monitor it with `claude agents`.
 
 ### [`/batch`](https://code.claude.com/docs/en/agents)
 
-Orchestrates large-scale code changes in parallel. It researches the repo, decomposes the work into 5–30 independent units, and — once approved — spawns one subagent per unit in an isolated git worktree, opening one PR per unit.
+Orchestrates large-scale code changes in parallel. It researches the repo, decomposes the work into 5–30 independent units, and, once approved, spawns one subagent per unit in an isolated git worktree, opening one PR per unit.
 
 ```
 > /batch migrate src/ from Solid to React
@@ -216,7 +216,7 @@ Starts the app and navigates to the changed screen to confirm it visually.
 
 ### [`/verify`](https://code.claude.com/docs/en/skills)
 
-Confirms a change does what it should by building the project, running the app, and observing the result — instead of relying only on tests or type checks. *(Requires v2.1.145+.)*
+Confirms a change does what it should by building the project, running the app, and observing the result, instead of relying only on tests or type checks. *(Requires v2.1.145+.)*
 
 ```
 > /verify
@@ -280,13 +280,13 @@ Upgrades existing code to a newer model (model IDs, thinking config, etc.).
 
 **What it is.** An agentic knowledge-work desktop app (macOS and Windows, also reachable remotely from the mobile app), aimed at people who aren't developers. Think of it as the equivalent of Claude Code, but for "office work" rather than programming: instead of just answering, Claude executes multi-step tasks on its own using tools.
 
-**What it's for.** You delegate a goal and let the agent carry it through to a finished result. It works with files, spreadsheets, documents, and slides, and connects to enterprise apps — chaining steps and passing context between them. It's a good fit for repetitive or time-consuming workflows in operations, marketing, finance, and similar areas, where you'd rather describe the outcome than do every click yourself.
+**What it's for.** You delegate a goal and let the agent carry it through to a finished result. It works with files, spreadsheets, documents, and slides, and connects to enterprise apps, chaining steps and passing context between them. It's a good fit for repetitive or time-consuming workflows in operations, marketing, finance, and similar areas, where you'd rather describe the outcome than do every click yourself.
 
 **How it connects to other tools.** Cowork can drive Anthropic's other agents as tools: Claude in Excel (spreadsheet agent), Claude in PowerPoint (slides agent), Claude in Chrome (browser agent), and Claude Design (canvas). It also uses plugins and enterprise connectors, so a single task can pull data, transform it, and produce a deliverable across several apps.
 
 **Practical use cases.**
 
-- "Read this sales spreadsheet, build a summary, and turn it into a deck" — Cowork analyzes the data in Excel and hands the context to PowerPoint to generate the slides.
+- "Read this sales spreadsheet, build a summary, and turn it into a deck", Cowork analyzes the data in Excel and hands the context to PowerPoint to generate the slides.
 - Monthly reporting: pull numbers from a connected source, update a tracker, and draft the narrative in a Word doc.
 - Marketing ops: take a campaign brief, gather references from the web (via Chrome), and assemble a one-pager.
 - Live artifacts: produce a dashboard or doc whose code re-runs when reopened, so the output stays current.
@@ -295,9 +295,9 @@ Upgrades existing code to a newer model (model IDs, thinking config, etc.).
 
 ## 3. Claude Design
 
-**What it is.** A design tool with a canvas where Claude creates and iterates on visual artifacts from a chat conversation. It launched as a research preview — the first public product from Anthropic Labs — and runs on Claude Opus 4.7.
+**What it is.** A design tool with a canvas where Claude creates and iterates on visual artifacts from a chat conversation. It launched as a research preview, the first public product from Anthropic Labs, and runs on Claude Opus 4.7.
 
-**What it's for.** You describe what you want — a UI prototype, slides, a one-pager, a mockup — and Claude generates a first version. You then refine it through direct edits on the canvas, inline comments, and sliders, instead of starting over for each adjustment. The aim is to go from idea to a polished visual quickly, keeping a human in the loop on the look and feel.
+**What it's for.** You describe what you want, a UI prototype, slides, a one-pager, a mockup, and Claude generates a first version. You then refine it through direct edits on the canvas, inline comments, and sliders, instead of starting over for each adjustment. The aim is to go from idea to a polished visual quickly, keeping a human in the loop on the look and feel.
 
 **How it connects to other tools.** A standout is that it's *code-aware*: it can read the React components in your repository so the design comes out aligned with what already exists. It exports to formats like PDF, PPTX, and HTML, and integrates with Canva. Claude Cowork can also use Claude Design as one of its tools.
 
@@ -314,7 +314,7 @@ Upgrades existing code to a newer model (model IDs, thinking config, etc.).
 
 ## In short
 
-- **Cowork** is for *executing knowledge work end to end* — delegating multi-step office tasks to an autonomous agent.
-- **Design** is for *creating and refining visual pieces* conversationally — from prototypes to slides — with a human steering the look.
+- **Cowork** is for *executing knowledge work end to end*, delegating multi-step office tasks to an autonomous agent.
+- **Design** is for *creating and refining visual pieces* conversationally, from prototypes to slides, with a human steering the look.
 
 ---

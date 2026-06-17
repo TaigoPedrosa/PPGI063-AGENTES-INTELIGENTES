@@ -286,7 +286,7 @@ Spec Kit and Superpowers are the two most visible options, but the SDD space is 
 - **Kiro** (AWS). An agentic IDE built around specs from the ground up. You describe a feature and it produces requirements, a design and a task list as first class files, with hooks that react to events in the editor.
 - **BMAD-METHOD.** An open framework that models an agile team as a set of agents (analyst, product manager, architect, scrum master) which collaborate to turn an idea into a PRD, an architecture and sharded stories an implementation agent then builds.
 - **Tessl.** A spec centric, "AI native" approach where the specification is the primary artifact and code is regenerated from it, paired with a registry of reusable specs.
-- [**AGENTS.md](http://agents.md/).** Not a tool but a convention. A single markdown file at the repo root that tells any agent how to work in this codebase. It pairs well with both tools above and is becoming a de facto standard.
+- **`AGENTS.md`**. Not a tool but a convention. A single markdown file at the repo root that tells any agent how to work in this codebase. It pairs well with both tools above and is becoming a de facto standard.
 - **Agent Skills.** You can write project specific skills without adopting the whole Superpowers library.
 
 The common thread across all of them is the same bet: capture intent in a durable, machine readable artifact and let the agent work from that, rather than from a chat history that vanishes.
@@ -309,7 +309,7 @@ The common thread across all of them is the same bet: capture intent in a durabl
 
 1. **AWS Kiro**. `https://kiro.dev`
 2. **BMAD-METHOD**. `https://github.com/bmad-code-org/BMAD-METHOD`
-3. [**AGENTS.md**](http://agents.md/). `https://agents.md`
+3. [**AGENTS.md**](https://agents.md)
 4. **Agent Skills**. `https://docs.anthropic.com/en/docs/claude-code/skills`
 
 ### 8.4 Clean-room engineering and evaluation

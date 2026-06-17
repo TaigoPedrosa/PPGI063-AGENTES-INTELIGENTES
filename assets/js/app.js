@@ -1,5 +1,5 @@
 /* =========================================================================
-   Agentes Inteligentes — static course site
+   Agentes Inteligentes · static course site
    Zero-build: fetches structure.json + markdown, renders in-browser.
    ========================================================================= */
 (() => {
@@ -237,8 +237,8 @@
     try {
       const url = CONTENT_BASE + node.markdown;
       const res = await fetch(url, { cache: "no-cache" });
-      if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${url}`);
-      const md = await res.text();
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText} (${url})`);
+      const md = normalizeMarkdown(await res.text());
       article.innerHTML = marked.parse(md);
       enhance(article, node);
     } catch (err) {
@@ -246,10 +246,24 @@
       article.appendChild(el("div", { class: "errbox" }, [
         el("p", { html: "<strong>Não foi possível carregar este conteúdo.</strong>" }),
         el("p", { html: `Detalhe: <code>${String(err.message || err)}</code>` }),
-        el("p", { class: "acc__desc", text: "Em ambiente local, sirva a pasta com um servidor estático (ex.: python -m http.server) — o navegador bloqueia fetch via file://." }),
+        el("p", { class: "acc__desc", text: "Em ambiente local, sirva a pasta com um servidor estático (ex.: python -m http.server), já que o navegador bloqueia fetch via file://." }),
       ]));
     }
   }
+
+  // strip invisible characters that break Markdown parsing (common in Notion / Google Docs exports:
+  // word joiners around code, zero-width spaces, soft hyphens, non-breaking spaces)
+  function normalizeMarkdown(s) {
+    return s
+      .replace(/\uFEFF/g, "")                       // byte-order mark
+      .replace(/[\u200B-\u200D\u2060]/g, "")        // zero-width space/joiner + word joiner
+      .replace(/\u00AD/g, "")                        // soft hyphen
+      .replace(/[\u00A0\u202F\u2009]/g, " ");       // (narrow) no-break space, thin space -> normal space
+  }
+
+  // filename-like extensions that are never real TLDs (used to spot bogus autolinks)
+  const FILE_EXT = new Set(("py js ts jsx tsx txt json yaml yml toml rb go rs java kt swift c cc cpp h hpp " +
+    "cs php css scss sass sql sh bash zsh md mdx ipynb env cfg ini conf lock mod xml html vue svelte").split(" "));
 
   /* ---------- markdown enhancement ---------- */
   function enhance(root, node) {
@@ -275,7 +289,7 @@
       t.replaceWith(wrap); wrap.appendChild(t);
     });
 
-    // heading anchors (scroll only — no hash change to keep router intact)
+    // heading anchors (scroll only, no hash change to keep router intact)
     root.querySelectorAll("h2, h3").forEach((h) => {
       const id = slugify(h.textContent);
       if (!id) return;
@@ -307,6 +321,16 @@
           && a.parentElement.textContent.trim() === a.textContent.trim()) ? a.parentElement : a;
         host.replaceWith(pdfCard(url, title));
         return;
+      }
+      // Notion exports a bare filename like `models.py` as a dead autolink to http://models.py/.
+      // Detect host == link text with a code-file extension and render it as inline code instead.
+      const bogus = href.match(/^http:\/\/([a-z0-9._-]+\.[a-z0-9]{1,6})\/?$/i);
+      if (bogus) {
+        const txt = (a.textContent || "").trim();
+        if (txt.toLowerCase() === bogus[1].toLowerCase() && FILE_EXT.has(bogus[1].split(".").pop().toLowerCase())) {
+          a.replaceWith(el("code", { text: txt }));
+          return;
+        }
       }
       if (/^https?:\/\//i.test(href)) { a.target = "_blank"; a.rel = "noopener noreferrer"; return; }
       if (/\.md(["'])?$/i.test(href) || /\.md[#?]/i.test(href)) {
