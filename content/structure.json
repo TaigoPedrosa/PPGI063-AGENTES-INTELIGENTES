@@ -1,0 +1,129 @@
+{
+  "course": {
+    "title": "Agentes Inteligentes",
+    "subtitle": "PPGI · IC / UFAL · 2026.1",
+    "tagline": "Do passado ao futuro dos agentes de IA"
+  },
+  "sections": [
+    {
+      "name": "Passado",
+      "slug": "passado",
+      "description": "As raízes dos agentes inteligentes — dos sistemas simbólicos e arquiteturas BDI aos primeiros sistemas multiagente que pavimentaram o caminho até hoje.",
+      "markdown": "passado/index.md"
+    },
+    {
+      "name": "Presente",
+      "slug": "presente",
+      "description": "O estado da arte dos agentes de IA: diretrizes de uso, boas práticas de engenharia, experimentos práticos e o ferramental atual em torno de Claude Code e plataformas equivalentes.",
+      "children": [
+        {
+          "name": "Guidelines",
+          "slug": "guidelines",
+          "description": "Diretrizes para entender, projetar e operar agentes inteligentes com responsabilidade — da arquitetura à janela de contexto.",
+          "children": [
+            {
+              "name": "Síntese",
+              "slug": "sintese",
+              "description": "Síntese das diretrizes para agentes inteligentes: arquitetura, memória, ferramentas e critérios de parada.",
+              "markdown": "presente/guidelines/synthesis.md"
+            },
+            {
+              "name": "Multiplataforma",
+              "slug": "multiplataforma",
+              "description": "Como skills, regras, prompts e agentes se mapeiam entre Claude, Copilot, Gemini e Cursor — com diagrama de decisão.",
+              "markdown": "presente/guidelines/multi-platform.md"
+            }
+          ]
+        },
+        {
+          "name": "Best Practices",
+          "slug": "best-practices",
+          "description": "Padrões consolidados para trabalhar com agentes: desenvolvimento guiado por especificação, subagentes e formação de equipes.",
+          "children": [
+            {
+              "name": "Spec-Driven Development",
+              "slug": "spec-driven-development",
+              "description": "Desenvolvimento guiado por especificação com agentes: do contrato (spec) ao plano, às tarefas e à implementação verificável.",
+              "markdown": "presente/best-practices/spec-driven-development.md"
+            },
+            {
+              "name": "Subagents",
+              "slug": "subagents",
+              "description": "Quando e como delegar a subagentes — isolamento de contexto, paralelismo e verificação adversarial.",
+              "markdown": "presente/best-practices/subagents.md"
+            },
+            {
+              "name": "Courses",
+              "slug": "courses",
+              "description": "Cursos e materiais de referência sobre fluxos de trabalho com agentes de programação.",
+              "markdown": "presente/best-practices/courses.md"
+            }
+          ]
+        },
+        {
+          "name": "Experiments",
+          "slug": "experiments",
+          "description": "Experimentos práticos conduzidos na disciplina, explorando os limites e capacidades dos agentes.",
+          "children": [
+            {
+              "name": "Subagents",
+              "slug": "subagents",
+              "description": "Experimentos com subagentes: orquestração, fan-out e medição de resultados.",
+              "markdown": "presente/experiments/subagents.md"
+            },
+            {
+              "name": "Skills",
+              "slug": "skills",
+              "description": "Experimentos com skills: commits convencionais, hook de proteção e automação com Playwright.",
+              "markdown": "presente/experiments/skills.md",
+              "children": [
+                {
+                  "name": "Conventional Commit Skill",
+                  "slug": "conventional-commit-skill",
+                  "description": "Skill de commits convencionais usada no Experimento 1.",
+                  "markdown": "presente/experiments/skills/conventional-commit-skill.md"
+                },
+                {
+                  "name": "Git Commit Skill",
+                  "slug": "git-commit-skill",
+                  "description": "Skill ambígua de commit usada no Experimento 1.",
+                  "markdown": "presente/experiments/skills/git-commit-skill.md"
+                },
+                {
+                  "name": "Hook",
+                  "slug": "hook",
+                  "description": "Hook de proteção acionado no Experimento 1.",
+                  "markdown": "presente/experiments/skills/hook.md"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Articles · Skills",
+          "slug": "articles-skills",
+          "description": "Coletânea de artigos sobre skills — o que são, como funcionam e por que importam.",
+          "markdown": "presente/articles-skills.md"
+        },
+        {
+          "name": "Claude Code & Tools",
+          "slug": "claude-code",
+          "description": "Comandos do Claude Code, Claude Cowork e Claude Design — o ferramental no dia a dia.",
+          "markdown": "presente/claude-code.md"
+        },
+        {
+          "name": "Costs",
+          "slug": "costs",
+          "description": "Custos, tokens e comparativos de eficiência entre modelos e plataformas.",
+          "markdown": "presente/costs.md"
+        }
+      ]
+    },
+    {
+      "name": "Futuro",
+      "slug": "futuro",
+      "description": "Para onde caminham os agentes: autonomia de longo horizonte, sociedades de agentes, confiança e segurança, e a economia de tokens que molda a engenharia.",
+      "markdown": "futuro/index.md"
+    }
+  ]
+}
