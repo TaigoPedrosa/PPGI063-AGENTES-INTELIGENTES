@@ -26,5 +26,4 @@
 
 ## General reference
 
-- RUSSELL, Stuart; NORVIG, Peter. *Artificial Intelligence: A Modern Approach.* Pearson,
-  2020.
+- RUSSELL, Stuart; NORVIG, Peter. *Artificial Intelligence: A Modern Approach.* Pearson, 2020.

@@ -35,5 +35,4 @@
   Machine.* Cambridge: MIT Press, 1969.
 - NILSSON, Nils J. *The Quest for Artificial Intelligence.* Cambridge: Cambridge University
   Press, 2010.
-- RUSSELL, Stuart; NORVIG, Peter. *Artificial Intelligence: A Modern Approach.* 3rd ed.
-  Upper Saddle River: Prentice Hall, 2010.
+- RUSSELL, Stuart; NORVIG, Peter. *Artificial Intelligence: A Modern Approach.* 3rd ed. Upper Saddle River: Prentice Hall, 2010.

@@ -50,5 +50,4 @@
 - GEORGEFF, Michael P.; LANSKY, Amy L. *Reasoning About Actions & Plans.* 1986.
 - GEORGEFF, Michael P.; INGRAND, François F. *Real-Time Reasoning: The Monitoring and Control
   of Spacecraft Systems.* 1990.
-- RUSSELL, Stuart; NORVIG, Peter. *Artificial Intelligence: A Modern Approach.* Pearson,
-  2020.
+- RUSSELL, Stuart; NORVIG, Peter. *Artificial Intelligence: A Modern Approach.* Pearson, 2020.
