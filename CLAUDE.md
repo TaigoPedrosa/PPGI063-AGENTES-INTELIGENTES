@@ -1,6 +1,6 @@
 # CLAUDE.md: notes for AI agents
 
-Static, **zero-build** course site for *Agentes Inteligentes* (PPGI · IC / UFAL).
+Static, **zero-build** course site for *Intelligent Agents* (PPGI · IC / UFAL).
 The browser fetches `content/structure.json`, walks the tree, and renders Markdown
 client-side. There is **no framework, no bundler, no build step, no server code**.
 Keep it that way so it can deploy to GitHub Pages as plain files.
@@ -34,13 +34,13 @@ A `Node` is:
   "name": "Display Name",          // shown in sidebar, cards, breadcrumbs, <title>
   "slug": "kebab-case",            // path segment; unique among siblings
   "description": "one paragraph",  // optional; shown on section pages + cards
-  "markdown": "futuro/articles.md",// optional; path under content/
+  "markdown": "future/articles.md",// optional; path under content/
   "children": [ Node, ... ]        // optional
 }
 ```
 
 The route for a node is the `/`-joined chain of slugs from the root: e.g.
-`#/futuro/articles`. The full slug path (not the slug alone) is the unique key.
+`#/future/articles`. The full slug path (not the slug alone) is the unique key.
 
 ### Branch vs leaf: the one rule that bites
 
@@ -52,9 +52,9 @@ Routing (`route()` in `app.js`):
 
 **`markdown` wins over `children`.** A node with *both* renders as a leaf page; its
 children are then reachable only through the sidebar tree (expandable), not as cards.
-This is intentional and used by `presente/experiments/skills`. If you want a section
+This is intentional and used by `present/experiments/skills`. If you want a section
 *landing* page that lists its children as cards, give the node `children` and **no
-`markdown`** (this is how `Presente` and `Futuro` work).
+`markdown`** (this is how `Present` and `Future` work).
 
 Node order in `structure.json` is meaningful: a DFS pre-order of the tree is the
 "book order" that drives the **Prev / Next** footer links.
@@ -96,7 +96,7 @@ Rendered with `marked` (GFM, `breaks:false`), then post-processed:
   applies to folders, md files, **and** assets (images, PDFs). Slugify on import
   (e.g. `Apresentação Final.pdf` → `apresentacao-final.pdf`) and update the links.
 - **Co-locate assets** with the Markdown that references them, via relative paths
-  (`pdfs/…`, `figuras/…`). A shared `pdfs/` folder per section is fine (see `futuro/`).
+  (`pdfs/…`, `figuras/…`). A shared `pdfs/` folder per section is fine (see `future/`).
 - **Reuse CSS tokens** from `:root`; match the existing glass/dark aesthetic.
 - **Don't add a build step or dependencies.** New libs, if ever truly needed, go in
   `index.html` as a pinned CDN `<script>`, never npm/bundler.

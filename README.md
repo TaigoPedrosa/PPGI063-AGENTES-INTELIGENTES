@@ -1,86 +1,84 @@
-# Site da disciplina Agentes Inteligentes
+# Intelligent Agents — course site
 
-Site estático que apresenta o material da disciplina **Agentes Inteligentes**
-(PPGI · IC / UFAL · 2026.1), organizado na linha do tempo **Passado → Presente → Futuro**.
+Static site presenting the material for the **Intelligent Agents** course
+(PPGI · IC / UFAL · 2026.1), organized along the timeline **Past → Present → Future**.
 
-É um site **sem build**: o navegador lê um arquivo `structure.json` que descreve a
-hierarquia de páginas e renderiza o conteúdo Markdown em tempo real. Não há servidor,
-framework ou etapa de compilação, apenas HTML, CSS e um arquivo JavaScript. Por isso
-roda diretamente no **GitHub Pages**.
+It is a **no-build** site: the browser reads a `structure.json` file that describes the
+page hierarchy and renders the Markdown content live. There is no server, framework, or
+compilation step, just HTML, CSS, and a single JavaScript file. That is why it runs
+directly on **GitHub Pages**.
 
-## Como funciona
+## How it works
 
-- **`content/structure.json`** define a árvore de seções (sidebar, páginas e navegação).
-- Cada nó da árvore é uma **página**:
-  - um nó **com `markdown`** renderiza esse arquivo Markdown (página de conteúdo);
-  - um nó **com `children`** vira uma página de seção que mostra a descrição e
-    *cards* clicáveis para as subpáginas.
-- A navegação é por **hash** (`#/presente/best-practices/subagents`), então o
-  recarregar de página e os links diretos funcionam sem configuração de servidor.
+- **`content/structure.json`** defines the tree of sections (sidebar, pages, navigation).
+- Each node in the tree is a **page**:
+  - a node **with `markdown`** renders that Markdown file (a content page);
+  - a node **with `children`** becomes a section page showing its description and
+    clickable *cards* for the subpages.
+- Navigation uses the URL **hash** (`#/present/best-practices/subagents`), so page
+  reloads and direct links work without any server configuration.
 
-O Markdown é renderizado com formatação rica: títulos, listas, tabelas (com rolagem
-horizontal no mobile), blocos de código com realce de sintaxe, diagramas **Mermaid**,
-imagens e um **visualizador de PDF embutido** (todo link `.pdf` vira um card que abre
-o PDF inline).
+Markdown is rendered with rich formatting: headings, lists, tables (with horizontal
+scrolling on mobile), syntax-highlighted code blocks, **Mermaid** diagrams, images, and
+an **inline PDF viewer** (every `.pdf` link becomes a card that opens the PDF inline).
 
 ## Design
 
-Tema *obsidian glass*: fundo escuro com elementos de vidro fosco (*frosty glass*),
-aurora de fundo, tipografia Fraunces / Hanken Grotesk / JetBrains Mono, transições
-suaves e itens recolhíveis. Layout responsivo com *drawer* lateral no mobile.
+*Obsidian glass* theme: dark background with frosty-glass elements, a background aurora,
+Fraunces / Hanken Grotesk / JetBrains Mono typography, smooth transitions, and
+collapsible items. Responsive layout with a side drawer on mobile.
 
-## Estrutura do repositório
+## Repository structure
 
 ```
 githubpages/
-├── index.html              # casca da página (sidebar, topo, libs via CDN)
-├── .nojekyll               # desativa o Jekyll no GitHub Pages (serve pastas/_ como estão)
+├── index.html              # page shell (sidebar, top bar, CDN libs)
+├── .nojekyll               # disables Jekyll on GitHub Pages (serves _ / folders as-is)
 ├── assets/
-│   ├── css/styles.css      # tema obsidian glass (design tokens em :root)
-│   ├── js/app.js           # roteador + renderer (fetch → marked → realce)
+│   ├── css/styles.css      # obsidian glass theme (design tokens in :root)
+│   ├── js/app.js           # router + renderer (fetch → marked → highlight)
 │   └── images/             # favicons, logo
 └── content/
-    ├── structure.json      # << a árvore de páginas do curso
-    ├── passado/            # Markdown + assets por seção
-    ├── presente/
-    └── futuro/             # papers (pdfs/) + páginas de world models
+    ├── structure.json      # << the course page tree
+    ├── past/               # Markdown + assets per section
+    ├── present/
+    └── future/             # papers (pdfs/) + world-model pages
 ```
 
-Cada seção guarda seu próprio Markdown e os *assets* (imagens, PDFs) ao lado dos
-arquivos que os referenciam, usando caminhos relativos.
+Each section keeps its own Markdown and *assets* (images, PDFs) next to the files that
+reference them, using relative paths.
 
-## Editar o conteúdo
+## Editing the content
 
-1. Escreva/edite o Markdown dentro de `content/<seção>/…`.
-2. Coloque imagens e PDFs perto do `.md` (ou numa subpasta) e referencie por caminho
-   relativo, por exemplo `![](figuras/diagrama.png)`, `[Paper](pdfs/artigo.pdf)`.
-3. Registre a página em `content/structure.json` com `name`, `slug`, `description`
-   e `markdown` (página de conteúdo) **ou** `children` (página de seção).
-4. Use *slugs* em `kebab-case`, únicos entre os irmãos.
+1. Write/edit Markdown inside `content/<section>/…`.
+2. Put images and PDFs next to the `.md` (or in a subfolder) and reference them with a
+   relative path, e.g. `![](figures/diagram.png)`, `[Paper](pdfs/paper.pdf)`.
+3. Register the page in `content/structure.json` with `name`, `slug`, `description`,
+   and `markdown` (content page) **or** `children` (section page).
+4. Use `kebab-case` *slugs*, unique among siblings.
 
-## Rodar localmente
+## Running locally
 
-O navegador bloqueia `fetch` via `file://`, então sirva a pasta por HTTP:
+The browser blocks `fetch` over `file://`, so serve the folder over HTTP:
 
 ```bash
-cd githubpages
 python3 -m http.server 8000
-# abra http://localhost:8000
+# open http://localhost:8000
 ```
 
-Se não tiver Python, qualquer servidor estático serve:
+If you don't have Python, any static server works:
 
 ```bash
 npx serve .          # Node
-# ou a extensão "Live Server" do VS Code (botão "Go Live")
-# abra http://localhost:3000
+# or the VS Code "Live Server" extension ("Go Live" button)
+# open http://localhost:3000
 ```
 
-## Publicar
+## Publishing
 
-É um site estático puro, basta servir o conteúdo de `githubpages/` no GitHub Pages
-(o `.nojekyll` garante que pastas e arquivos sejam servidos sem processamento). Não há
-nada a compilar.
+It is a pure static site: just serve the contents of `githubpages/` on GitHub Pages
+(the `.nojekyll` file ensures folders and files are served without processing). There is
+nothing to compile.
 
-> Detalhes de arquitetura e convenções para manutenção (inclusive por agentes de IA)
-> estão em [CLAUDE.md](CLAUDE.md).
+> Architecture details and maintenance conventions (including for AI agents) are in
+> [CLAUDE.md](CLAUDE.md).
