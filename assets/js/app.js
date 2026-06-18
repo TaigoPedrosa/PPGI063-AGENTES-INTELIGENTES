@@ -155,7 +155,7 @@
     let cur = node;
     while (cur) { chain.unshift(cur); cur = cur.parent; }
     const frag = el("nav", { class: "crumbs", "aria-label": "Trilha" });
-    frag.appendChild(el("a", { href: "#/", text: "Início" }));
+    frag.appendChild(el("a", { href: "#/", text: "Start" }));
     chain.forEach((c, i) => {
       frag.appendChild(el("span", { class: "sep", text: "›" }));
       if (i === chain.length - 1) frag.appendChild(el("span", { class: "here", text: c.name }));
