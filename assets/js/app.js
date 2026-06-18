@@ -441,10 +441,29 @@
     $("#navToggle").setAttribute("aria-expanded", String(on)); $("#scrim").hidden = !on; }
   function closeNavSoon() { if (window.matchMedia("(max-width: 920px)").matches) setTimeout(() => openNav(false), 120); }
 
+  const atmosphere = $(".atmosphere");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function updateProgress() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
     $("#progress span").style.width = pct + "%";
+  }
+
+  // Parallax: the atmosphere is a full-document-height layer that already scrolls with
+  // the page. Pushing it DOWN by a fraction of the scroll makes it travel at ~0.75x —
+  // it moves with the content but lags slightly, for depth. The offset stays within the
+  // layer (it is shorter than the document), so an edge is never exposed.
+  function updateParallax() {
+    if (!atmosphere || reduceMotion) return;
+    atmosphere.style.setProperty("--bg-y", (Math.max(0, window.scrollY) * 0.25).toFixed(1) + "px");
+  }
+
+  let scrollTicking = false;
+  function onScroll() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => { updateProgress(); updateParallax(); scrollTicking = false; });
   }
 
   /* ---------- boot ---------- */
@@ -490,12 +509,13 @@
     $("#navToggle").addEventListener("click", () => openNav(!document.body.classList.contains("nav-open")));
     $("#scrim").addEventListener("click", () => openNav(false));
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") openNav(false); });
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     window.addEventListener("hashchange", () => { route(); });
 
     await route();
     updateProgress();
+    updateParallax();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

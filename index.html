@@ -19,13 +19,18 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-loading="true">
-  <!-- Atmosphere -->
+  <!-- Atmosphere (scrolls with the page) -->
   <div class="atmosphere" aria-hidden="true">
-    <div class="aurora aurora--a"></div>
-    <div class="aurora aurora--b"></div>
-    <div class="aurora aurora--c"></div>
-    <div class="grain"></div>
+    <div class="atmosphere__field">
+      <div class="aurora aurora--a"></div>
+      <div class="aurora aurora--b"></div>
+      <div class="aurora aurora--c"></div>
+      <div class="aurora aurora--d"></div>
+      <div class="aurora aurora--e"></div>
+    </div>
   </div>
+  <!-- Film grain (pinned to viewport) -->
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- Mobile top bar -->
   <header class="topbar">
