@@ -4,7 +4,7 @@
 
 [taxonomy.pdf](articles-skills/taxonomy.pdf)
 
-![Captura de Tela 2026-04-28 às 18.41.40.png](articles-skills/screenshot-2026-04-28-at-18-41-40.png)
+![Screenshot 2026-04-28 at 18.41.40](articles-skills/screenshot-2026-04-28-at-18-41-40.png)
 
 - **Control Axis:** Argues that the fundamental design decision for AI systems should be based on **control over execution** rather than the "intelligence" of the module.
 - **Taxonomy Definitions:**
@@ -21,7 +21,7 @@
 
 [SoK.pdf](articles-skills/sok.pdf)
 
-![Captura de Tela 2026-04-28 às 18.18.57.png](articles-skills/screenshot-2026-04-28-at-18-18-57.png)
+![Screenshot 2026-04-28 at 18.18.57](articles-skills/screenshot-2026-04-28-at-18-18-57.png)
 
 - **Unification Concept:** Proposes a formalization of agentic skills as reusable modules of **procedural memory**, distinct from atomic tool calls or one-off plans.
 - **Formal Structure:** Defines a skill as a tuple $S = (C, \pi, T, R)$, consisting of applicability conditions, execution policies, termination criteria, and reusable interfaces.
@@ -34,9 +34,9 @@
 
 [benchmark-1.pdf](articles-skills/benchmark-1.pdf)
 
-![Captura de Tela 2026-04-28 às 18.23.04.png](articles-skills/screenshot-2026-04-28-at-18-23-04.png)
+![Screenshot 2026-04-28 at 18.23.04](articles-skills/screenshot-2026-04-28-at-18-23-04.png)
 
-![Captura de Tela 2026-04-28 às 18.22.36.png](articles-skills/screenshot-2026-04-28-at-18-22-36.png)
+![Screenshot 2026-04-28 at 18.22.36](articles-skills/screenshot-2026-04-28-at-18-22-36.png)
 
 - **The Framework:** Introduces **SKILLSBENCH**, a benchmark of 84 tasks across 11 domains designed to measure if procedural knowledge packages actually improve agent performance.
 - **Skill Definition:** Defines skills as structured packages of procedural knowledge injected at inference time to guide agent behavior without retraining the model.
@@ -49,7 +49,7 @@
 
 [benchmark-2-software.pdf](articles-skills/benchmark-2-software.pdf)
 
-![Captura de Tela 2026-04-28 às 18.26.38.png](articles-skills/screenshot-2026-04-28-at-18-26-38.png)
+![Screenshot 2026-04-28 at 18.26.38](articles-skills/screenshot-2026-04-28-at-18-26-38.png)
 
 - **Practical Focus:** This is the first requirement-driven benchmark to isolate the marginal utility of skills in authentic Software Engineering (SWE) tasks using GitHub repositories.
 - **Limited Impact:** Contrary to high industry expectations, **39 of the 49 skills (80%)** evaluated resulted in zero improvement in task success rates.

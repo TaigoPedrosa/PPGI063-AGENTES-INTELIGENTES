@@ -297,6 +297,62 @@
           "markdown": "future/experiments.md"
         },
         {
+          "name": "Hands-On",
+          "slug": "hands-on",
+          "description": "Practical access to world models: which models to run, how to test them, video demos, industrial deployments, and step-by-step guides per model.",
+          "markdown": "future/hands-on.md",
+          "children": [
+            {
+              "name": "V-JEPA 2",
+              "slug": "vjepa2",
+              "description": "Video encoder + zero-shot robot planning. Colab, HuggingFace, PyTorch Hub.",
+              "markdown": "future/hands-on/vjepa2.md"
+            },
+            {
+              "name": "I-JEPA",
+              "slug": "ijepa",
+              "description": "The simplest entry point for understanding JEPA: 5 lines on HuggingFace, runs on CPU.",
+              "markdown": "future/hands-on/ijepa.md"
+            },
+            {
+              "name": "LeWorldModel",
+              "slug": "leworldmodel",
+              "description": "A complete train-predict-plan pipeline on a single GPU in a few hours. The most accessible JEPA.",
+              "markdown": "future/hands-on/leworldmodel.md"
+            },
+            {
+              "name": "DreamerV3",
+              "slug": "dreamerv3",
+              "description": "Training agents in imagination: Nature 2025, Minecraft diamond, a single hyperparameter set.",
+              "markdown": "future/hands-on/dreamerv3.md"
+            },
+            {
+              "name": "DreamerV4",
+              "slug": "dreamerv4",
+              "description": "Playing inside a world model in real time with a joystick. Interactive demos.",
+              "markdown": "future/hands-on/dreamerv4.md"
+            },
+            {
+              "name": "NVIDIA Cosmos 3",
+              "slug": "cosmos3",
+              "description": "An omnimodal world model (text + image + video + action). NIM containers, production-grade.",
+              "markdown": "future/hands-on/cosmos3.md"
+            },
+            {
+              "name": "NVIDIA Isaac Sim",
+              "slug": "isaac-sim",
+              "description": "Robotics simulation, digital twins, sim-to-real. Free, an industry standard.",
+              "markdown": "future/hands-on/isaac-sim.md"
+            },
+            {
+              "name": "World Labs Marble",
+              "slug": "marble",
+              "description": "3D world generation in the browser: no GPU, no code. API available.",
+              "markdown": "future/hands-on/marble.md"
+            }
+          ]
+        },
+        {
           "name": "Costs",
           "slug": "costs",
           "description": "Cost as compute and energy: 48× faster latent planning, model sizes, training/data cost, and the energy frontier at the edge.",

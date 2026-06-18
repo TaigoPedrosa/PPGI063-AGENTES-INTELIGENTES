@@ -1,52 +1,52 @@
 # Experiments · Sub-Agents
 
-## Benchmark de Produtividade: Linear vs. Subagentes
+## Productivity Benchmark: Linear vs. Subagents
 
-*Data:* 2026-04-28
-*Modelo:* Claude Sonnet 4.6
-*Tarefa:* Criar uma API REST Flask para um Sistema de Gerenciamento de Biblioteca (`models.py`, `app.py`, `test_api.py`)
+*Date:* 2026-04-28
+*Model:* Claude Sonnet 4.6
+*Task:* Build a Flask REST API for a Library Management System (`models.py`, `app.py`, `test_api.py`)
 
-## Metodologia
+## Methodology
 
-O experimento comparou dois modos de geração de código para a mesma tarefa:
+The experiment compared two code-generation modes for the same task:
 
-- *Round 1, Linear:* todos os arquivos escritos sequencialmente pelo agente principal em uma única passagem de raciocínio, sem delegação.
-- *Round 2, Subagentes:* 3 subagentes lançados em paralelo, cada um responsável por um arquivo, com contexto completo fornecido pelo agente orquestrador.
+- *Round 1, Linear:* all files written sequentially by the main agent in a single reasoning pass, with no delegation.
+- *Round 2, Subagents:* 3 subagents launched in parallel, each responsible for one file, with full context provided by the orchestrating agent.
 
-Ambos os rounds foram executados no mesmo ambiente (Arch Linux, Python 3.14.3, Flask + pytest via virtualenv) e validados com `python -m pytest test_api.py -v`.
+Both rounds ran in the same environment (Arch Linux, Python 3.14.3, Flask + pytest via virtualenv) and were validated with `python -m pytest test_api.py -v`.
 
-## Métricas Coletadas
+## Metrics Collected
 
-| Métrica | Round 1, Linear | Round 2, Subagentes |
+| Metric | Round 1, Linear | Round 2, Subagents |
 | --- | --- | --- |
-| Tempo de geração de código | ~15 s | ~18 s (tempo de parede, paralelo) |
-| Tokens totais (input + output) | ~11.200 (estimado¹) | *29.493* (medido via runtime) |
-| Chamadas de ferramentas, código | 3 `Write` | 4 `Write` (distribuídas) |
-| Chamadas de ferramentas, total | 9 (3 Write + 6 Bash²) | 12 (3 Agent + 4 Write + 2 Read + 3 Bash) |
-| Execução paralela | Não | Sim (3 agentes simultâneos) |
-| Testes passando | 3 / 3 | 3 / 3 |
-| Erros / retrabalho | 0 | 0 |
+| Code generation time | ~15 s | ~18 s (wall-clock, parallel) |
+| Total tokens (input + output) | ~11.200 (estimated¹) | *29.493* (measured via runtime) |
+| Tool calls, code | 3 `Write` | 4 `Write` (distributed) |
+| Tool calls, total | 9 (3 Write + 6 Bash²) | 12 (3 Agent + 4 Write + 2 Read + 3 Bash) |
+| Parallel execution | No | Yes (3 simultaneous agents) |
+| Tests passing | 3 / 3 | 3 / 3 |
+| Errors / rework | 0 | 0 |
 
-*¹ Estimado: o contexto do agente principal inclui system prompt (~6 k tokens) + histórico de conversação + conteúdo dos 3 arquivos. Tokens de subagentes não são expostos pelo runtime no Round 1.*
+*¹ Estimated: the main agent's context includes the system prompt (~6 k tokens) + conversation history + the contents of the 3 files. Subagent tokens are not exposed by the runtime in Round 1.*
 
-*² As 6 chamadas Bash incluem tentativas falhadas de instalação de dependências (ambiente Arch Linux gerenciado exige `python -m venv`).*
+*² The 6 Bash calls include failed dependency-installation attempts (the managed Arch Linux environment requires `python -m venv`).*
 
-## Detalhamento Round 2 por Subagente
+## Round 2 Breakdown by Subagent
 
-| Subagente | Arquivo | Tokens Totais | Ferramentas | Duração |
+| Subagent | File | Total Tokens | Tools | Duration |
 | --- | --- | --- | --- | --- |
 | models-agent | `models.py` | 9.246 | 1 Write | 7.410 ms |
 | api-agent | `app.py` | 9.711 | 1 Write | 8.546 ms |
 | test-agent | `test_api.py` | 10.536 | 2 Write/Edit | 18.009 ms |
-| *Total* | n/a | *29.493* | *4* | *18.009 ms* (gargalo: test-agent) |
+| *Total* | n/a | *29.493* | *4* | *18.009 ms* (bottleneck: test-agent) |
 
-O tempo de parede do Round 2 é ditado pelo subagente mais lento (test-agent, 18 s). Os outros dois terminaram em ~7–8 s mas ficaram ociosos aguardando a conclusão do gargalo.
+Round 2's wall-clock time is dictated by the slowest subagent (test-agent, 18 s). The other two finished in ~7–8 s but sat idle waiting for the bottleneck to complete.
 
-## Análise Qualitativa do Código
+## Qualitative Code Analysis
 
-### `models.py`, idêntico nos dois rounds
+### `models.py`, identical across both rounds
 
-Ambos geraram a mesma dataclass com `asdict`:
+Both produced the same dataclass with `asdict`:
 
 ```python
 from dataclasses import dataclass, asdict
@@ -62,39 +62,39 @@ class Book:
         return asdict(self)
 ```
 
-### `app.py`, diferença de estilo nos decoradores
+### `app.py`, stylistic difference in the decorators
 
 ```python
-# Round 1: decoradores modernos Flask 2.0+ (mais concisos)
+# Round 1: modern Flask 2.0+ decorators (more concise)
 @app.get("/books")
 @app.post("/books")
 @app.delete("/books/<int:book_id>")
 
-# Round 2: estilo tradicional com @app.route (mais explícito)
+# Round 2: traditional style with @app.route (more explicit)
 @app.route("/books", methods=["GET"])
 @app.route("/books", methods=["POST"])
 @app.route("/books/<int:book_id>", methods=["DELETE"])
 ```
 
-A lógica interna (helper `_find_book`, validação de campos, retornos HTTP) foi equivalente nos dois rounds.
+The internal logic (the `_find_book` helper, field validation, HTTP returns) was equivalent across both rounds.
 
-### `test_api.py`, Round 2 produziu testes mais robustos
+### `test_api.py`, Round 2 produced more robust tests
 
 ```python
-# Round 1: comparação de objeto inteiro (frágil à ordem de campos)
+# Round 1: whole-object comparison (fragile to field order)
 assert r_get.get_json() == created
 
-# Round 2: assertions granulares por campo (mais resilientes e legíveis)
+# Round 2: granular per-field assertions (more resilient and readable)
 assert data["titulo"] == "Dom Casmurro"
 assert data["autor"] == "Machado de Assis"
 assert data["ano"] == 1899
 ```
 
-O Round 2 também usou nomes de variáveis mais descritivos (`post_response`, `get_response`, `delete_response` vs. `r_post`, `r_get`, `r_del`) e a fixture de reset foi mais enxuta (sem `yield` desnecessário).
+Round 2 also used more descriptive variable names (`post_response`, `get_response`, `delete_response` vs. `r_post`, `r_get`, `r_del`) and its reset fixture was leaner (no unnecessary `yield`).
 
-## Resultado dos Testes
+## Test Results
 
-Ambos os rounds produziram código funcional sem erros:
+Both rounds produced functional, error-free code:
 
 ```text
 ============================= test session starts ==============================
@@ -108,24 +108,24 @@ test_api.py::test_delete_book                PASSED  [100%]
 ============================== 3 passed in 0.06s ===============================
 ```
 
-## Tabela Comparativa Final
+## Final Comparison Table
 
-| Dimensão | Vencedor | Justificativa |
+| Dimension | Winner | Rationale |
 | --- | --- | --- |
-| *Eficiência de tokens* | Round 1 | ~2,6× menos tokens (sem overhead de contexto por subagente) |
-| *Velocidade (wall clock)* | Empate | R1 ~15 s geração; R2 ~18 s (gargalo no test-agent) |
-| *Qualidade dos testes* | Round 2 | Assertions granulares, nomes descritivos, fixture mais limpa |
-| *Escalabilidade* | Round 2 | Paralelismo real beneficia tarefas maiores e independentes |
-| *Simplicidade operacional* | Round 1 | Sem overhead de orquestração ou risco de incoerência entre agentes |
+| *Token efficiency* | Round 1 | ~2,6× fewer tokens (no per-subagent context overhead) |
+| *Speed (wall clock)* | Tie | R1 ~15 s generation; R2 ~18 s (bottleneck in test-agent) |
+| *Test quality* | Round 2 | Granular assertions, descriptive names, cleaner fixture |
+| *Scalability* | Round 2 | Real parallelism benefits larger, independent tasks |
+| *Operational simplicity* | Round 1 | No orchestration overhead or risk of inconsistency across agents |
 
-## Conclusão
+## Conclusion
 
-O overhead de tokens no Round 2 (~18.300 tokens a mais) é o custo fixo de inicializar 3 contextos isolados com briefing completo. Para uma tarefa desta escala (3 arquivos pequenos, <200 linhas no total), esse custo não se paga em velocidade: o test-agent foi o gargalo e tornou o Round 2 ligeiramente mais lento que a abordagem linear.
+The token overhead in Round 2 (~18.300 extra tokens) is the fixed cost of spinning up 3 isolated contexts with a full briefing. For a task of this scale (3 small files, <200 lines in total), that cost does not pay off in speed: the test-agent was the bottleneck and made Round 2 slightly slower than the linear approach.
 
-O padrão de subagentes passa a se justificar quando:
+The subagent pattern starts to pay off when:
 
-1. Os arquivos ou módulos são substancialmente maiores (tempo de CPU por subagente > 30 s).
-2. As dependências entre subtarefas são mínimas (cada agente pode trabalhar de forma verdadeiramente independente).
-3. A qualidade do output individual importa mais que o custo total de tokens (subagentes tendem a produzir código mais cuidadoso por focarem em um escopo menor).
+1. The files or modules are substantially larger (CPU time per subagent > 30 s).
+2. The dependencies between subtasks are minimal (each agent can work truly independently).
+3. The quality of the individual output matters more than the total token cost (subagents tend to produce more careful code because they focus on a smaller scope).
 
-Para tarefas pequenas e coesas como esta, a abordagem linear é mais eficiente em tokens e igualmente rápida, com a vantagem adicional de manter coerência de estilo naturalmente, sem necessidade de briefing entre agentes.
+For small, cohesive tasks like this one, the linear approach is more token-efficient and just as fast, with the added advantage of naturally maintaining stylistic consistency, with no need for briefing between agents.
