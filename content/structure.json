@@ -8,8 +8,156 @@
     {
       "name": "Passado",
       "slug": "passado",
-      "description": "As raízes dos agentes inteligentes, dos sistemas simbólicos e arquiteturas BDI aos primeiros sistemas multiagente que pavimentaram o caminho até hoje.",
-      "markdown": "passado/index.md"
+      "description": "As raízes dos agentes inteligentes, uma linha do tempo de 1950 a 2000 em três eras: o nascimento da IA simbólica (1950–1970), as arquiteturas cognitivas e o embate simbólico vs. reativo (1980–1990) e os sistemas multiagentes, linguagens de comunicação e padrões (1990–2000).",
+      "children": [
+        {
+          "name": "Timeline",
+          "slug": "timeline",
+          "description": "O mapa da seção: meio século de agentes inteligentes (1950–2000) contado em três eras, e o fio condutor que as conecta.",
+          "markdown": "passado/timeline.md"
+        },
+        {
+          "name": "1950–1970",
+          "slug": "1950-1970",
+          "description": "O nascimento da IA: do neurônio matemático e do Teste de Turing à IA simbólica, aos micromundos e robôs planejadores, aos sistemas especialistas e à convergência entre teoria de controle e IA clássica.",
+          "children": [
+            {
+              "name": "Fundamentos",
+              "slug": "fundamentos",
+              "description": "Visão geral e linha do tempo de 1950–1970, e a questão central do período: como mecanizar o comportamento orientado a objetivos.",
+              "markdown": "passado/1950-1970/foundations.md"
+            },
+            {
+              "name": "The Birth of AI",
+              "slug": "birth-of-ai",
+              "description": "O neurônio de McCulloch & Pitts, o Teste de Turing e a Conferência de Dartmouth que batizou o campo e deu origem à IA simbólica.",
+              "markdown": "passado/1950-1970/birth-of-ai.md"
+            },
+            {
+              "name": "Symbolic Era & GPS",
+              "slug": "symbolic-era",
+              "description": "A Era Simbólica: o Logic Theorist e o General Problem Solver, o sonho de um solucionador universal de problemas e o limite da explosão combinatória.",
+              "markdown": "passado/1950-1970/symbolic-era.md"
+            },
+            {
+              "name": "Microworlds & Planning Robots",
+              "slug": "microworlds",
+              "description": "Micromundos e os primeiros robôs planejadores: SHRDLU no Blocks World, o robô Shakey e o algoritmo de planejamento STRIPS.",
+              "markdown": "passado/1950-1970/microworlds.md"
+            },
+            {
+              "name": "Expert Systems",
+              "slug": "expert-systems",
+              "description": "A virada epistemológica e os sistemas especialistas: arquitetura de produção, DENDRAL, MYCIN e XCON, e as limitações que levaram ao aprendizado de máquina.",
+              "markdown": "passado/1950-1970/expert-systems.md"
+            },
+            {
+              "name": "Control Theory & Classical AI",
+              "slug": "control-theory",
+              "description": "Cibernética, feedback e teoria de controle versus IA clássica, e a convergência percepção → planejamento → ação que prefigurou o agente moderno.",
+              "markdown": "passado/1950-1970/control-theory.md"
+            },
+            {
+              "name": "References",
+              "slug": "references",
+              "description": "A bibliografia citada na apresentação de 1950–1970, dos artigos fundadores de 1943–1959 aos surveys clássicos.",
+              "markdown": "passado/1950-1970/references.md"
+            }
+          ]
+        },
+        {
+          "name": "1980–1990",
+          "slug": "1980-1990",
+          "description": "A arquitetura da mente artificial: o agente como abstração, as arquiteturas cognitivas ACT-R e SOAR, o modelo BDI/PRS (até o Ônibus Espacial da NASA) e a crítica reativa de Brooks que desembocou no Inverno da IA.",
+          "children": [
+            {
+              "name": "Fundamentos",
+              "slug": "fundamentos",
+              "description": "Visão geral de 1980–1990: a institucionalização da IA, a abstração de agente e a tensão entre as abordagens top-down (simbólica) e bottom-up (reativa).",
+              "markdown": "passado/1980-1990/foundations.md"
+            },
+            {
+              "name": "Architecture of the Artificial Mind",
+              "slug": "artificial-mind-architecture",
+              "description": "A definição de inteligência como agente, a institucionalização da IA, as duas correntes da época e a arquitetura cognitiva ACT-R validada por fMRI.",
+              "markdown": "passado/1980-1990/artificial-mind-architecture.md"
+            },
+            {
+              "name": "SOAR",
+              "slug": "soar",
+              "description": "A arquitetura cognitiva SOAR (Newell, Laird & Rosenbloom, 1983): raciocínio como busca em espaço de problemas e o chunking como aprendizado automático.",
+              "markdown": "passado/1980-1990/soar.md"
+            },
+            {
+              "name": "BDI",
+              "slug": "bdi",
+              "description": "O modelo Belief–Desire–Intention de Bratman (1987), o framework PRS e sua aplicação mais famosa: o sistema de detecção de falhas do Ônibus Espacial da NASA.",
+              "markdown": "passado/1980-1990/bdi.md"
+            },
+            {
+              "name": "Production Systems & Reactive Critique",
+              "slug": "production-systems-reactive-critique",
+              "description": "O auge comercial da IA simbólica (OPS-5, R1/XCON) e a ruptura de Rodney Brooks: inteligência sem representação, a arquitetura de subsunção e o Inverno da IA.",
+              "markdown": "passado/1980-1990/production-systems-reactive-critique.md"
+            },
+            {
+              "name": "References",
+              "slug": "references",
+              "description": "A bibliografia citada na apresentação de 1980–1990: SOAR, ACT-R, BDI/PRS e referências gerais.",
+              "markdown": "passado/1980-1990/references.md"
+            }
+          ]
+        },
+        {
+          "name": "1990–2000",
+          "slug": "1990-2000",
+          "description": "A década social dos agentes: o Contract Net Protocol de negociação, a Programação Orientada a Agentes, as linguagens de comunicação (KQML, FIPA-ACL) baseadas em atos de fala, e a plataforma JADE que tornou tudo isso executável.",
+          "children": [
+            {
+              "name": "Fundamentos",
+              "slug": "fundamentos",
+              "description": "Visão geral de 1990–2000: a virada da cognição para a comunicação, os sistemas multiagentes e o fio que liga negociação, linguagens de comunicação, padrões e plataformas.",
+              "markdown": "passado/1990-2000/foundations.md"
+            },
+            {
+              "name": "Contract Net Protocol",
+              "slug": "contract-net-protocol",
+              "description": "O protocolo de Reid Smith para distribuir tarefas dinamicamente entre agentes: o ciclo anúncio → lance → adjudicação → execução, inspirado no mercado de contratos.",
+              "markdown": "passado/1990-2000/contract-net-protocol.md"
+            },
+            {
+              "name": "Agent-Oriented Programming",
+              "slug": "agent-oriented-programming",
+              "description": "A AOP de Yoav Shoham (1989): uma restrição da OOP em que o agente tem estado mental (crenças, capacidades, compromissos) e se comunica por atos de fala, implementada na linguagem AGENT-0.",
+              "markdown": "passado/1990-2000/agent-oriented-programming.md"
+            },
+            {
+              "name": "Agent Communication & KQML",
+              "slug": "agent-communication-kqml",
+              "description": "O problema dos anos 90, a visão de Genesereth, a base filosófica dos atos de fala (Austin/Searle) e a KQML, a primeira linguagem de comunicação de agentes amplamente usada.",
+              "markdown": "passado/1990-2000/agent-communication-kqml.md"
+            },
+            {
+              "name": "FIPA-ACL",
+              "slug": "fipa-acl",
+              "description": "O padrão FIPA-ACL: semântica formal em lógica modal (precondições de viabilidade + efeito racional), os atos comunicativos e o comparativo com a KQML.",
+              "markdown": "passado/1990-2000/fipa-acl.md"
+            },
+            {
+              "name": "JADE",
+              "slug": "jade",
+              "description": "O Java Agent Development Framework: middleware open source e em conformidade com a FIPA, com arquitetura distribuída, páginas brancas/amarelas, ciclo de vida, behaviours e o Contract Net pronto para uso.",
+              "markdown": "passado/1990-2000/jade.md"
+            },
+            {
+              "name": "References",
+              "slug": "references",
+              "description": "A bibliografia citada na apresentação de 1990–2000: Contract Net, atos de fala, KQML, FIPA-ACL, JADE e referências das eras anteriores.",
+              "markdown": "passado/1990-2000/references.md"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Presente",
