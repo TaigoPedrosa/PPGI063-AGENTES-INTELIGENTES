@@ -68,6 +68,14 @@ python3 -m http.server 8000
 # abra http://localhost:8000
 ```
 
+Se não tiver Python, qualquer servidor estático serve:
+
+```bash
+npx serve .          # Node
+# ou a extensão "Live Server" do VS Code (botão "Go Live")
+# abra http://localhost:3000
+```
+
 ## Publicar
 
 É um site estático puro, basta servir o conteúdo de `githubpages/` no GitHub Pages
