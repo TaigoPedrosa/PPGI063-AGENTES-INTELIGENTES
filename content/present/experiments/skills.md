@@ -38,10 +38,10 @@ With Skills: [https://opncd.ai/share/pHztNc39](https://opncd.ai/share/pHztNc39)
 
 Took 5 minutes, built the automation suite without failing cases or getting stuck. Used the CLI tool to verify page structure and behaviors before implementing. Used a single file for all tests, only included chromium. Used 43k tokens.
 
-![Captura de Tela 2026-04-27 às 20.09.33.png](skills/screenshot-2026-04-27-at-20-09-33.png)
+![Screenshot 2026-04-27 at 20.09.33](skills/screenshot-2026-04-27-at-20-09-33.png)
 
 No Skills: [https://opncd.ai/share/pHztNc39](https://opncd.ai/share/pHztNc39)
 
 Took 21 minutes, got stuck many times with failing cases as it has not used the CLI tool, but created the tests beforehand and ran them to fix later. However, used a different, more modular approach and set it up for multiple browsers. Used 84k tokens.
 
-![Captura de Tela 2026-04-27 às 19.53.18.png](skills/screenshot-2026-04-27-at-19-53-18.png)
+![Screenshot 2026-04-27 at 19.53.18](skills/screenshot-2026-04-27-at-19-53-18.png)

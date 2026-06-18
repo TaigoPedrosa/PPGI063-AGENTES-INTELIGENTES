@@ -299,7 +299,7 @@
         {
           "name": "Hands-On",
           "slug": "hands-on",
-          "description": "Acesso prático aos world models: quais modelos rodar, como testar, demos em vídeo, deployments industriais e guias passo a passo por modelo.",
+          "description": "Practical access to world models: which models to run, how to test them, video demos, industrial deployments, and step-by-step guides per model.",
           "markdown": "future/hands-on.md",
           "children": [
             {
@@ -311,43 +311,43 @@
             {
               "name": "I-JEPA",
               "slug": "ijepa",
-              "description": "O ponto de entrada mais simples para entender JEPA — 5 linhas no HuggingFace, roda em CPU.",
+              "description": "The simplest entry point for understanding JEPA: 5 lines on HuggingFace, runs on CPU.",
               "markdown": "future/hands-on/ijepa.md"
             },
             {
               "name": "LeWorldModel",
               "slug": "leworldmodel",
-              "description": "Pipeline completo train-predict-plan em single GPU, poucas horas. O JEPA mais acessível.",
+              "description": "A complete train-predict-plan pipeline on a single GPU in a few hours. The most accessible JEPA.",
               "markdown": "future/hands-on/leworldmodel.md"
             },
             {
               "name": "DreamerV3",
               "slug": "dreamerv3",
-              "description": "Treinar agentes na imaginação — Nature 2025, Minecraft diamond, single hyperparameter set.",
+              "description": "Training agents in imagination: Nature 2025, Minecraft diamond, a single hyperparameter set.",
               "markdown": "future/hands-on/dreamerv3.md"
             },
             {
               "name": "DreamerV4",
               "slug": "dreamerv4",
-              "description": "Jogar dentro de um world model em tempo real com joystick. Demos interativas.",
+              "description": "Playing inside a world model in real time with a joystick. Interactive demos.",
               "markdown": "future/hands-on/dreamerv4.md"
             },
             {
               "name": "NVIDIA Cosmos 3",
               "slug": "cosmos3",
-              "description": "World model omnimodal (texto+imagem+vídeo+ação). NIM containers, production-grade.",
+              "description": "An omnimodal world model (text + image + video + action). NIM containers, production-grade.",
               "markdown": "future/hands-on/cosmos3.md"
             },
             {
               "name": "NVIDIA Isaac Sim",
               "slug": "isaac-sim",
-              "description": "Simulação robótica, digital twins, sim-to-real. Gratuito, padrão da indústria.",
+              "description": "Robotics simulation, digital twins, sim-to-real. Free, an industry standard.",
               "markdown": "future/hands-on/isaac-sim.md"
             },
             {
               "name": "World Labs Marble",
               "slug": "marble",
-              "description": "Geração de mundos 3D no navegador — sem GPU, sem código. API disponível.",
+              "description": "3D world generation in the browser: no GPU, no code. API available.",
               "markdown": "future/hands-on/marble.md"
             }
           ]

@@ -1,6 +1,6 @@
 # Articles - World Models & Agentic AI
 
-> Team: *Agentes Inteligentes no Futuro* (Athus Vasconcellos, José Janio de Castro Junior, Aylla de Melo Lino).
+> Team: *Intelligent Agents in the Future* (Athus Vasconcellos, José Janio de Castro Junior, Aylla de Melo Lino).
 > Source PDFs live in `future/pdfs/`.
 
 ---

@@ -1,191 +1,191 @@
 # Best Practices - Subagents
 
-# Guideline: MCP e Sub-agentes em Agentes Inteligentes
+# Guideline: MCP and Sub-agents in Intelligent Agents
 
-## 1) Escopo e objetivo
+## 1) Scope and objective
 
-Este guideline consolida diretrizes práticas sobre **Model Context Protocol (MCP)** e **sub-agentes** com base em:
+This guideline consolidates practical guidance on **Model Context Protocol (MCP)** and **sub-agents** based on:
 
-1. na apresentação `PPGI_Agentes_Inteligentes___Claude_Code.pdf`;
-2. em documentação oficial do MCP;
-3. em documentação oficial do Claude Code;
-4. em especificações técnicas citadas pelas próprias documentações.
+1. the presentation `PPGI_Agentes_Inteligentes___Claude_Code.pdf`;
+2. the official MCP documentation;
+3. the official Claude Code documentation;
+4. technical specifications cited by the documentation itself.
 
-Objetivo: oferecer um material de referência para desenho, operação e governança de sistemas agentivos com integração de ferramentas externas e execução paralela/isolada de tarefas.
+Objective: to provide reference material for the design, operation, and governance of agentic systems that integrate external tools and run tasks in parallel and in isolation.
 
 ---
 
 ## 2) MCP (Model Context Protocol)
 
-## 2.1 Definição
+## 2.1 Definition
 
-O MCP é um **padrão aberto** para conectar aplicações de IA a fontes de dados e ferramentas externas, reduzindo integrações ponto a ponto entre cada agente e cada serviço.
+MCP is an **open standard** for connecting AI applications to external data sources and tools, reducing point-to-point integrations between each agent and each service.
 
-- Na apresentação: MCP aparece como solução para o problema **N x M** de integrações (slide 19) e é descrito como padrão aberto com comunicação via **JSON-RPC 2.0** (slide 20).
-- Na documentação oficial: o MCP é apresentado como padrão aberto para integração de aplicações LLM com dados, ferramentas e fluxos (`What is MCP?`).
+- In the presentation: MCP appears as a solution to the **N x M** integration problem (slide 19) and is described as an open standard with communication via **JSON-RPC 2.0** (slide 20).
+- In the official documentation: MCP is presented as an open standard for integrating LLM applications with data, tools, and workflows (`What is MCP?`).
 
-## 2.2 Arquitetura conceitual (Host, Client, Server)
+## 2.2 Conceptual architecture (Host, Client, Server)
 
-Modelo de papéis:
+Role model:
 
-- **Host**: aplicação de IA que orquestra a interação com o usuário;
-- **Client**: componente no host que mantém conexão com um servidor MCP;
-- **Server**: processo local/remoto que expõe capacidades (ferramentas, recursos, prompts).
+- **Host**: the AI application that orchestrates interaction with the user;
+- **Client**: the component within the host that maintains a connection to an MCP server;
+- **Server**: a local or remote process that exposes capabilities (tools, resources, prompts).
 
-Esse modelo está na apresentação (slide 20) e na especificação do MCP (overview e arquitetura).
+This model is in the presentation (slide 20) and in the MCP specification (overview and architecture).
 
-## 2.3 Primitivas centrais
+## 2.3 Core primitives
 
-O MCP organiza capacidades em três grupos (slide 21; especificação MCP):
+MCP organizes capabilities into three groups (slide 21; MCP specification):
 
-- **Resources**: dados somente leitura (arquivos, registros, respostas de API);
-- **Prompts**: templates reutilizáveis para interações e workflows;
-- **Tools**: funções executáveis com potencial efeito colateral (chamar API, escrever em banco, executar comandos).
+- **Resources**: read-only data (files, records, API responses);
+- **Prompts**: reusable templates for interactions and workflows;
+- **Tools**: executable functions with potential side effects (calling an API, writing to a database, running commands).
 
-## 2.4 Transporte e protocolo base
+## 2.4 Transport and base protocol
 
-- O protocolo base usa **JSON-RPC 2.0** (apresentação slide 20; especificação MCP).
-- Transportes comuns citados: **STDIO** (processo local) e **HTTP/SSE** (remoto), com observação de que SSE aparece historicamente mas pode estar descontinuado em alguns clientes específicos (ver doc do Claude Code para comportamento atual).
+- The base protocol uses **JSON-RPC 2.0** (presentation slide 20; MCP specification).
+- Common transports cited: **STDIO** (local process) and **HTTP/SSE** (remote), with the note that SSE appears historically but may be deprecated in some specific clients (see the Claude Code docs for current behavior).
 
-## 2.5 Benefícios práticos esperados
+## 2.5 Expected practical benefits
 
-1. **Interoperabilidade**: construir uma vez e integrar com múltiplos hosts compatíveis.
-2. **Redução de acoplamento**: servidores de ferramenta desacoplados da aplicação de IA.
-3. **Escalabilidade de integrações**: evita multiplicação de conectores proprietários.
-4. **Padronização de capacidades**: recursos, prompts e tools com semântica comum.
+1. **Interoperability**: build once and integrate with multiple compatible hosts.
+2. **Reduced coupling**: tool servers decoupled from the AI application.
+3. **Integration scalability**: avoids the proliferation of proprietary connectors.
+4. **Capability standardization**: resources, prompts, and tools with common semantics.
 
-## 2.6 Segurança e governança (diretrizes)
+## 2.6 Security and governance (guidelines)
 
-Com base na apresentação (slide 22) e na especificação MCP (seção de Security and Trust & Safety):
+Based on the presentation (slide 22) and the MCP specification (Security and Trust & Safety section):
 
-1. Exigir **consentimento explícito** do usuário para acesso a dados e execução de ações.
-2. Tratar descrições de tools e conteúdo externo como **não confiáveis por padrão**.
-3. Aplicar controles de autorização e princípio de menor privilégio por servidor/ferramenta.
-4. Registrar auditoria de chamadas de tools e resultados críticos.
-5. Em integrações OAuth, usar mecanismos de restrição de audiência/recurso quando aplicável (base conceitual alinhada ao RFC 8707).
-
----
-
-## 3) Sub-agentes
-
-## 3.1 Definição operacional
-
-Sub-agente é uma instância separada de agente, criada pelo orquestrador para executar subtarefa específica em **contexto isolado**.
-
-- Apresentação (slide 25): destaca paralelismo, isolamento de contexto, especialização e tolerância a falhas.
-- Docs Claude Code: sub-agentes têm janela de contexto própria, podem ter prompt/scope de ferramentas próprios e retornam resumo ao fluxo principal.
-
-## 3.2 Padrões de orquestração
-
-### A) Orchestrator-Subagent (paralelo)
-
-Fluxo típico (slide 27):
-
-1. objetivo recebido pelo orquestrador;
-2. decomposição em subtarefas independentes;
-3. execução paralela;
-4. coleta de resultados;
-5. síntese/iteração.
-
-Usar quando subtarefas são independentes e se beneficiam de concorrência.
-
-### B) Pipeline sequencial
-
-Fluxo típico (slide 27):
-
-1. agente A gera artefato;
-2. agente B valida;
-3. agente C transforma/integra.
-
-Usar quando há dependência forte entre etapas e necessidade de gates de qualidade.
-
-## 3.3 Isolamento e integração de resultados
-
-Diretrizes:
-
-1. Definir contrato claro de entrada/saída para cada sub-agente.
-2. Evitar compartilhamento implícito de estado; passar dados explicitamente.
-3. Consolidar retorno em formato padronizado (achados, evidências, próximos passos).
-4. Quando disponível, usar isolamento por worktree para sandbox de alterações.
-
-## 3.4 Limitações e riscos
-
-Conforme apresentação (slide 28) e docs oficiais:
-
-- **Custo/token** cresce com número de sub-agentes;
-- **Sem estado compartilhado automático**;
-- **Falhas locais** exigem recuperação pelo orquestrador;
-- **Risco de propagação de prompt injection** entre artefatos/resultados;
-- **Latência operacional** pode aumentar em cadeias longas.
-
-Mitigações recomendadas:
-
-1. validar saída de sub-agente antes de promover para contexto principal;
-2. limitar escopo de tools por papel;
-3. padronizar política de retry, timeout e fallback;
-4. usar sub-agentes apenas quando houver ganho real de isolamento ou paralelismo.
+1. Require **explicit consent** from the user for data access and action execution.
+2. Treat tool descriptions and external content as **untrusted by default**.
+3. Apply authorization controls and the principle of least privilege per server/tool.
+4. Log audit trails of tool calls and critical results.
+5. In OAuth integrations, use audience/resource restriction mechanisms where applicable (conceptual basis aligned with RFC 8707).
 
 ---
 
-## 4) Guia de adoção (checklist)
+## 3) Sub-agents
 
-## 4.1 Para MCP
+## 3.1 Operational definition
 
-- [ ]  Mapear ferramentas/dados externos prioritários.
-- [ ]  Definir servidores MCP por domínio (ex.: design, SCM, banco, observabilidade).
-- [ ]  Classificar cada tool por risco e nível de permissão.
-- [ ]  Implementar política de consentimento, logs e revisão de segurança.
-- [ ]  Medir impacto de contexto e ajustar estratégia de carregamento de ferramentas.
+A sub-agent is a separate agent instance, created by the orchestrator to run a specific subtask in an **isolated context**.
 
-## 4.2 Para sub-agentes
+- Presentation (slide 25): highlights parallelism, context isolation, specialization, and fault tolerance.
+- Claude Code docs: sub-agents have their own context window, can have their own prompt/tool scope, and return a summary to the main flow.
 
-- [ ]  Definir catálogo de papéis (ex.: pesquisa, implementação, teste, revisão).
-- [ ]  Estabelecer template de prompt e formato de saída por papel.
-- [ ]  Escolher padrão de execução (paralelo vs pipeline) por tipo de tarefa.
-- [ ]  Adotar critérios de “quando não usar sub-agente”.
-- [ ]  Instrumentar métricas de custo, latência e taxa de retrabalho.
+## 3.2 Orchestration patterns
+
+### A) Orchestrator-Subagent (parallel)
+
+Typical flow (slide 27):
+
+1. objective received by the orchestrator;
+2. decomposition into independent subtasks;
+3. parallel execution;
+4. collection of results;
+5. synthesis/iteration.
+
+Use this when subtasks are independent and benefit from concurrency.
+
+### B) Sequential pipeline
+
+Typical flow (slide 27):
+
+1. agent A produces an artifact;
+2. agent B validates it;
+3. agent C transforms/integrates it.
+
+Use this when there is a strong dependency between stages and a need for quality gates.
+
+## 3.3 Isolation and result integration
+
+Guidelines:
+
+1. Define a clear input/output contract for each sub-agent.
+2. Avoid implicit state sharing; pass data explicitly.
+3. Consolidate the return value into a standardized format (findings, evidence, next steps).
+4. When available, use worktree isolation to sandbox changes.
+
+## 3.4 Limitations and risks
+
+Per the presentation (slide 28) and the official docs:
+
+- **Cost/token** usage grows with the number of sub-agents;
+- **No automatic shared state**;
+- **Local failures** require recovery by the orchestrator;
+- **Risk of prompt injection propagation** across artifacts/results;
+- **Operational latency** can increase in long chains.
+
+Recommended mitigations:
+
+1. validate sub-agent output before promoting it to the main context;
+2. limit tool scope by role;
+3. standardize the retry, timeout, and fallback policy;
+4. use sub-agents only when there is a real gain in isolation or parallelism.
 
 ---
 
-## 5) Quando usar MCP e sub-agentes juntos
+## 4) Adoption guide (checklist)
 
-Use combinação MCP + sub-agentes quando:
+## 4.1 For MCP
 
-1. houver múltiplas integrações externas a consultar em paralelo;
-2. cada subtarefa demandar conjunto distinto de tools/permissões;
-3. o volume de saída puder saturar o contexto da thread principal;
-4. for importante separar pesquisa/extração de dados da etapa de síntese final.
+- [ ]  Map priority external tools/data.
+- [ ]  Define MCP servers per domain (e.g., design, SCM, database, observability).
+- [ ]  Classify each tool by risk and permission level.
+- [ ]  Implement a consent policy, logging, and security review.
+- [ ]  Measure context impact and adjust the tool-loading strategy.
 
-Exemplo de desenho:
+## 4.2 For sub-agents
 
-- Sub-agente A: coleta requisitos em issue tracker (MCP).
-- Sub-agente B: consulta dados operacionais/erros (MCP).
-- Sub-agente C: avalia impacto em código e testes.
-- Orquestrador: consolida, prioriza e propõe plano executável.
-
----
-
-## 6) Referências
-
-### 6.1 Fonte primária da apresentação
-
-1. Wagner, D. L. P.; Taígo; João Victor. **Intelligent Agents: A Study with Claude Code (Netflix Clone Use Case)**. PPGI, 2026. Arquivo: `PPGI_Agentes_Inteligentes___Claude_Code.pdf`.
-    - Tópicos usados: MCP (slides 18-23) e Sub-agents (slides 24-28).
-
-### 6.2 Documentação oficial
-
-1. Model Context Protocol. **What is MCP?** Disponível em: `https://modelcontextprotocol.io/introduction`.
-2. Model Context Protocol. **Specification (2025-03-26)**. Disponível em: `https://modelcontextprotocol.io/specification/2025-03-26`.
-3. Anthropic (Claude Code Docs). **Connect Claude Code to tools via MCP**. Disponível em: `https://docs.anthropic.com/en/docs/claude-code/mcp`.
-4. Anthropic (Claude Code Docs). **Create custom subagents**. Disponível em: `https://docs.anthropic.com/en/docs/claude-code/sub-agents`.
-
-### 6.3 Especificações técnicas relacionadas
-
-1. JSON-RPC Working Group. **JSON-RPC 2.0 Specification**. Disponível em: `https://www.jsonrpc.org/specification`.
-2. Campbell, B.; Bradley, J.; Tschofenig, H. **RFC 8707 - Resource Indicators for OAuth 2.0**. IETF, 2020. Disponível em: `https://www.rfc-editor.org/rfc/rfc8707`.
+- [ ]  Define a catalog of roles (e.g., research, implementation, testing, review).
+- [ ]  Establish a prompt template and output format per role.
+- [ ]  Choose an execution pattern (parallel vs pipeline) per task type.
+- [ ]  Adopt criteria for "when not to use a sub-agent".
+- [ ]  Instrument metrics for cost, latency, and rework rate.
 
 ---
 
-## 7) Nota metodológica
+## 5) When to use MCP and sub-agents together
 
-Este documento evita afirmações não rastreáveis. Quando um detalhe depende de implementação específica (por exemplo, comportamento de transporte, carregamento de tools ou regras de execução em background), a referência prioritária é a documentação oficial do produto (Claude Code docs) e, para semântica de protocolo, a especificação oficial do MCP.
+Use the MCP + sub-agents combination when:
+
+1. there are multiple external integrations to query in parallel;
+2. each subtask requires a distinct set of tools/permissions;
+3. the volume of output could saturate the main thread's context;
+4. it is important to separate data research/extraction from the final synthesis stage.
+
+Design example:
+
+- Sub-agent A: gathers requirements from an issue tracker (MCP).
+- Sub-agent B: queries operational data/errors (MCP).
+- Sub-agent C: assesses the impact on code and tests.
+- Orchestrator: consolidates, prioritizes, and proposes an executable plan.
+
+---
+
+## 6) References
+
+### 6.1 Primary source of the presentation
+
+1. Wagner, D. L. P.; Taígo; João Victor. **Intelligent Agents: A Study with Claude Code (Netflix Clone Use Case)**. PPGI, 2026. File: `PPGI_Agentes_Inteligentes___Claude_Code.pdf`.
+    - Topics used: MCP (slides 18-23) and Sub-agents (slides 24-28).
+
+### 6.2 Official documentation
+
+1. Model Context Protocol. **What is MCP?** Available at: `https://modelcontextprotocol.io/introduction`.
+2. Model Context Protocol. **Specification (2025-03-26)**. Available at: `https://modelcontextprotocol.io/specification/2025-03-26`.
+3. Anthropic (Claude Code Docs). **Connect Claude Code to tools via MCP**. Available at: `https://docs.anthropic.com/en/docs/claude-code/mcp`.
+4. Anthropic (Claude Code Docs). **Create custom subagents**. Available at: `https://docs.anthropic.com/en/docs/claude-code/sub-agents`.
+
+### 6.3 Related technical specifications
+
+1. JSON-RPC Working Group. **JSON-RPC 2.0 Specification**. Available at: `https://www.jsonrpc.org/specification`.
+2. Campbell, B.; Bradley, J.; Tschofenig, H. **RFC 8707 - Resource Indicators for OAuth 2.0**. IETF, 2020. Available at: `https://www.rfc-editor.org/rfc/rfc8707`.
+
+---
+
+## 7) Methodological note
+
+This document avoids untraceable claims. When a detail depends on a specific implementation (for example, transport behavior, tool loading, or background execution rules), the priority reference is the official product documentation (Claude Code docs) and, for protocol semantics, the official MCP specification.
