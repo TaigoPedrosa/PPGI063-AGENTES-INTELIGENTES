@@ -359,6 +359,12 @@
           "markdown": "future/costs.md"
         }
       ]
+    },
+    {
+      "name": "Authors",
+      "slug": "authors",
+      "description": "The student teams behind this site — Past, Present, and Future — each with their LinkedIn and Lattes profiles.",
+      "markdown": "authors/authors.md"
     }
   ]
 }
